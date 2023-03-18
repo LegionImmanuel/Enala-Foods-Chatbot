@@ -36,8 +36,6 @@ const server = http.createServer(app);
 const io = new Server(server);
 require("dotenv").config();
 
-const mongoose = require("mongoose");
-const MongoDBStore = require("connect-mongodb-session")(session);
 
 // Set the port to 8080 if not specified in the environment
 const PORT = process.env.PORT; //||  8080;
@@ -261,7 +259,7 @@ io.on("connection", (socket) => {
 });
 
 // Setting up and starting the server
-server.listen(PORT, HOST, () => {
+app.listen(PORT, HOST, () => {
   console.log(`Server is now running on http://${HOST}:${PORT}`);
 });
 
