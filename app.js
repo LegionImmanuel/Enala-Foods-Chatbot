@@ -37,8 +37,8 @@ const io = new Server(server);
 require("dotenv").config();
 
 
-// Set the port to 8080 if not specified in the environment
-const PORT = process.env.PORT; //||  8080;
+// Set the port to 10000 if not specified in the environment
+const PORT = process.env.PORT; //|| 10000;
 
 // Set the host to localhost if not specified in the environment
 const HOST = process.env.HOST; //||  "localhost";
@@ -51,7 +51,7 @@ const sessionMiddleware = session({
   saveUninitialized: true,
   cookie: {
     secure: false,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
   },
 });
             
