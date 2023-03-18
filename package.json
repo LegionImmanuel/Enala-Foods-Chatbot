@@ -1,0 +1,25 @@
+{
+    "name": "restaurant-chatbot",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "connect-mongo": "^5.0.0",
+        "connect-mongodb-session": "^3.1.1",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "mongoose": "^7.0.2",
+        "path": "^0.12.7",
+        "socket.io": "^4.6.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.21"
+    }
+}
