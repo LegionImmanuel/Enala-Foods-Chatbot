@@ -259,7 +259,7 @@ io.on("connection", (socket) => {
 });
 
 // Setting up and starting the server
-app.listen(PORT, HOST, () => {
+server.listen(PORT, HOST, () => {
   console.log(`Server is now running on http://${HOST}:${PORT}`);
 });
 
