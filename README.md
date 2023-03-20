@@ -26,21 +26,22 @@
   </p>
 </div>
 
-# The Enala Foods Restaurant Chat Bot 
-This is a Restaurant Chat Bot interface that allows customers to place orders, check order history, and cancel orders. The chatbot stores user sessions based on devices and does not require authentication.
+# <h1 align="center">The Enala Foods Restaurant Chat Bot </h1>
+<p align = "center"> This is a Restaurant Chat Bot interface that allows customers to place orders, check order history, and cancel orders. The chatbot stores user sessions based on devices and does not require authentication. </p>
 
-## Features
- * Chat interface: The chatbot interface is designed to resemble a conversation with a human being. It is easy to use and intuitive.
+## <h2 align="center">Features</h2>
+ * <p align = "center"> Chat interface: The chatbot interface is designed to resemble a conversation with a human being. It is easy to use and intuitive. </p>
 
- * User Session Management: The chatbot stores user sessions based on devices. This means that when a customer returns to the chatbot page from the same device, they will be able to resume their previous conversation with the bot.
-
- * Order Management: When a customer lands on the chatbot page, the bot sends them several options. These include:
+ * <p align = "center"> User Session Management: The chatbot stores user sessions based on devices. This means that when a customer returns to the chatbot page from the same device, they will be able to resume their previous conversation with the bot.</p>
+ 
+ * <p align = "center"> Order Management: When a customer lands on the chatbot page, the bot sends them several options. These include:</p>
 
  * Select 1 to Place an order
  * Select 99 to checkout order
  * Select 98 to see order history
  * Select 97 to see current order
  * Select 0 to cancel order
+ <br>
 
  * Order Placement: When a customer selects “1”, the bot returns a list of items from the restaurant. The customer can select preferred items from the list using the same number select system and place an order.
  * Order Checkout: When a customer selects “99”, the bot responds with “order placed” if there is an order. If there is no order, the bot responds with “No order to place”. The customer is also given an option to place a new order.
@@ -48,19 +49,19 @@ This is a Restaurant Chat Bot interface that allows customers to place orders, c
  * Current Order: When a customer selects “97”, the bot returns the current order.
  * Order Cancellation: When a customer selects “0”, the bot cancels the order if there is one.
 
-## Technologies Used
+## <h2 align="center">Technologies Used</h2>
 The chatbot was built using the following technologies:
  
  * Backend: Node.js, Express.js, express-session, dotenv
  * Frontend: HTML, CSS, JS, Socket.io
 
 
-## How to Use
+## <h2 align="center">How to Use</h2>
 To use the chatbot, simply navigate to the chatbot page on your device. When the page loads, the chatbot will display the available options. From there, you can select the option that you want and proceed with the conversation.
 
 
 
-## Dependencies
+## <h2 align="center">Dependencies</h2>
 The Chat Bot uses the following dependencies:
 
 * express
@@ -70,9 +71,21 @@ The Chat Bot uses the following dependencies:
 
 
 
-## Chat-bot Preview
-* https://enalafoodsbot.onrender.com/
-<img alt="site-preview" src="/img/desktop-preview.jpg">
+## <h2 align="center">Chat-bot Preview</h2>
+<p align = "center">
+ https://enalafoodsbot.onrender.com/
+</p>
+
+### <h3 align="center">Mobile Version</h3>
+
+<p align = "center">
+<img alt="site-preview" src="/img/mobile-preview.jpg">
+</p>
+
+<br>
+
+### <h3 align="center">Desktop Version</h3>
+<p align = "center"><img  alt="site-preview" src="/img/desktop-preview.jpg"></p>
 
 
 
