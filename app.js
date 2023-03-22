@@ -17,6 +17,13 @@ const PORT = process.env.PORT; //|| 10000;
 // Set the host to localhost if not specified in the environment
 const HOST = process.env.HOST; //||  "localhost";
 
+
+// Setup and start the server
+server.listen(PORT, HOST, () => {
+  console.log(`Server is now running on http://${HOST}:${PORT}`);
+});
+
+
 // Connect to MongoDB
 
 const sessionMiddleware = session({
@@ -154,13 +161,13 @@ io.on("connection", (socket) => {
             });
             socket.emit(
               "bot-message",
-              `Thank you for  order, ${userName}! Your order of ${currentOrder} will be ready shortly.\n1. Place an order\n98. Order history\n0. Cancel order`
+              `Thank you for ordering, ${userName}! Your order of ${currentOrder} will be available in a bit.\n1. Place an order\n98. Order history\n0. Cancel order`
             );
             socket.request.session[deviceId].currentOrder = [];
           } else {
             socket.emit(
               "bot-message",
-              `You have placed any order yet. Kindly enter '1' to see the menu.`
+              `You haven\'t placed any order yet. Kindly enter '1' to see the menu.`
             );
           }
           break;
@@ -177,7 +184,7 @@ io.on("connection", (socket) => {
               .join("\n");
             socket.emit(
               "bot-message",
-              `Here is your order history:\n${history}\n1. Place an order\n98. Order history\n0. Cancel order`
+              `${userName}, here is your order history:\n${history}\n1. Place an order\n98. Order history\n0. Cancel order`
             );
           } else {
             socket.emit(
@@ -192,14 +199,14 @@ io.on("connection", (socket) => {
           if (currentOrder.length === 0 && orderHistory.length === 0) {
             socket.emit(
               "bot-message",
-              `There is nothing to cancel. Enter '1' to see the menu.`
+              `There is no order currently. Enter '1' to see the menu.`
             );
           } else {
             socket.request.session[deviceId].currentOrder = [];
             orderHistory.length = 0;
             socket.emit(
               "bot-message",
-              `Your order has been cancelled.\n1. Place a new order\n98. Order history`
+              `Your order request has been cancelled.\n1. Place a new order\n98. Order history`
             );
           }
           break;
@@ -224,18 +231,12 @@ io.on("connection", (socket) => {
       }
     }
   });
+  
   // Listen for disconnection event
   socket.on("disconnect", () => {
     delete socket.request.session[deviceId];
-
     console.log("User disconnected:", socket.id);
   });
 });
-
-// Setting up and starting the server
-server.listen(PORT, HOST, () => {
-  console.log(`Server is now running on http://${HOST}:${PORT}`);
-});
-
 
 
