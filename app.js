@@ -189,7 +189,7 @@ io.on("connection", (socket) => {
           } else {
             socket.emit(
               "bot-message",
-              `There is no order history yet. Enter '1' to see the menu.`
+              `You have no order history yet, ${userName}. Enter '1' to see the menu.`
             );
           }
           break;
