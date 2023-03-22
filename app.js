@@ -130,7 +130,7 @@ io.on("connection", (socket) => {
             .join("\n");
           socket.emit(
             "bot-message",
-            `Select from the menu below to select your desired meal:\n${itemOptions}\n`
+            `Select from the menu below to order your desired meal:\n${itemOptions}\n`
           );
           break;
         case "97":
