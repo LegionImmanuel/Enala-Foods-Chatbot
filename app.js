@@ -140,7 +140,7 @@ io.on("connection", (socket) => {
               socket.request.session[deviceId].currentOrder.join(", ");
             socket.emit(
               "bot-message",
-              `Your current order: ${currentOrder}\n1. Place an order\n99. Checkout order\n98. Order history\n97. Current order\n0. Cancel order`
+              `${userName}, you have ordered for: ${currentOrder}\n1. Place an order\n99. Checkout order\n98. Order history\n97. Current order\n0. Cancel order`
             );
           } else {
             socket.emit(
