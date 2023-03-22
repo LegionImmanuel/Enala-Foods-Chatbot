@@ -24,15 +24,14 @@ server.listen(PORT, HOST, () => {
 });
 
 
-// Connect to MongoDB
-
+// Session Middleware
 const sessionMiddleware = session({
   secret: "session-pass",
   resave: false,
   saveUninitialized: true,
   cookie: {
     secure: false,
-    maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
+    maxAge: 1000 * 60 * 60 * 24 * 5, //5 days
   },
 });
             
