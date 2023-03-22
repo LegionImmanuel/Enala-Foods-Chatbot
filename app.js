@@ -177,7 +177,7 @@ io.on("connection", (socket) => {
             const history = orderHistory
               .map(
                 (order) =>
-                  `${order.user} ordered ${
+                  `You ordered for ${
                     order.order
                   } on ${order.date.toDateString()}`
               )
