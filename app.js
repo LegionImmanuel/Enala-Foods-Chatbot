@@ -118,7 +118,7 @@ io.on("connection", (socket) => {
       socket.request.session[deviceId].userName = userName;
       socket.emit(
         "bot-message",
-        `Welcome, ${userName}!\n Select from the service options currently on offer below\n1. Place an Order\n99. Checkout your Order\n98. Check your Order history\n97. See Current Order\n0. Cancel your Order`
+        `Welcome, ${userName}!\n Select from the service options currently on offer below\n1. Place an Order\n99. Checkout your Order\n98. See your Order history\n97. See Current Order\n0. Cancel your Order`
       );
     } else {
       switch (message) {
