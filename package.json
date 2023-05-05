@@ -16,4 +16,8 @@
     "express-session": "^1.17.3",
     "socket.io": "^4.6.1"
   }
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/LegionImmanuel/Enala-Foods-Chatbot.git"
+}
 }
