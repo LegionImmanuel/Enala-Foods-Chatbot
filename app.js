@@ -11,20 +11,14 @@ const io = new Server(server);
 require("dotenv").config();
 
 
-// Set the port to 10000 if not specified in the environment
-const PORT = process.env.PORT; //|| 10000;
+// Set the port to 8080 if not specified in the environment
+const PORT = process.env.PORT; //||  8080;
 
 // Set the host to localhost if not specified in the environment
 const HOST = process.env.HOST; //||  "localhost";
 
+// Connect to MongoDB
 
-// Setup and start the server
-server.listen(PORT, HOST, () => {
-  console.log(`Server is now running on http://${HOST}:${PORT}`);
-});
-
-
-// Session Middleware
 const sessionMiddleware = session({
   secret: "session-pass",
   resave: false,
@@ -88,7 +82,7 @@ io.on("connection", (socket) => {
 
   // Ask for the user's name if not provided already
   if (!socket.request.session[deviceId].userName) {
-    socket.emit("bot-message", "Hello and Welcome to Enala Foods Restaurant!\n I am your FoodBot.\n Kindly enter your name");
+    socket.emit("bot-message", "Hello and Welcome to Enala Foods Restaurant!\n I am your FoodBot.\n Kindly enter your name to begin");
   } else {
     socket.emit(
       "bot-message",
@@ -118,7 +112,7 @@ io.on("connection", (socket) => {
       socket.request.session[deviceId].userName = userName;
       socket.emit(
         "bot-message",
-        `Welcome, ${userName}!\n Select from the service options currently on offer below\n1. Place an Order\n99. Checkout your Order\n98. See your Order history\n97. See Current Order\n0. Cancel your Order`
+        `Welcome, ${userName}!\n Select from the service options currently on offer below\n1. Place an order\n99. Checkout order\n98. Order history\n97. Current order\n0. Cancel order`
       );
     } else {
       switch (message) {
@@ -129,7 +123,7 @@ io.on("connection", (socket) => {
             .join("\n");
           socket.emit(
             "bot-message",
-            `Select from the menu below to order your desired meal:\n${itemOptions}\n`
+            `Select from the menu below to select your desired meal:\n${itemOptions}\n`
           );
           break;
         case "97":
@@ -139,7 +133,7 @@ io.on("connection", (socket) => {
               socket.request.session[deviceId].currentOrder.join(", ");
             socket.emit(
               "bot-message",
-              `${userName}, you have ordered for: ${currentOrder}\n1. Place an order\n99. Checkout order\n98. Order history\n97. Current order\n0. Cancel order`
+              `Your current order: ${currentOrder}\n1. Place an order\n99. Checkout order\n98. Order history\n97. Current order\n0. Cancel order`
             );
           } else {
             socket.emit(
@@ -160,13 +154,13 @@ io.on("connection", (socket) => {
             });
             socket.emit(
               "bot-message",
-              `Thank you for ordering, ${userName}! Your order of ${currentOrder} will be available in a bit.\n1. Place an order\n98. Order history\n0. Cancel order`
+              `Thank you for your order, ${userName}! Your order of ${currentOrder} will be ready shortly.\n1. Place an order\n98. Order history\n0. Cancel order`
             );
             socket.request.session[deviceId].currentOrder = [];
           } else {
             socket.emit(
               "bot-message",
-              `You haven\'t placed any order yet. Kindly enter '1' to see the menu.`
+              `You have not placed any order yet. Kindly enter '1' to see the menu.`
             );
           }
           break;
@@ -176,19 +170,19 @@ io.on("connection", (socket) => {
             const history = orderHistory
               .map(
                 (order) =>
-                  `You ordered for ${
+                  `You ordered ${
                     order.order
                   } on ${order.date.toDateString()}`
               )
               .join("\n");
             socket.emit(
               "bot-message",
-              `${userName}, here is your order history:\n${history}\n1. Place an order\n98. Order history\n0. Cancel order`
+              `Here is your order history ${userName}:\n${history}\n1. Place an order\n98. Order history\n0. Cancel order`
             );
           } else {
             socket.emit(
               "bot-message",
-              `You have no order history yet, ${userName}. Enter '1' to see the menu.`
+              `There is no order history yet. Enter '1' to see the menu.`
             );
           }
           break;
@@ -198,14 +192,14 @@ io.on("connection", (socket) => {
           if (currentOrder.length === 0 && orderHistory.length === 0) {
             socket.emit(
               "bot-message",
-              `There is no order currently. Enter '1' to see the menu.`
+              `There is nothing to cancel. Enter '1' to see the menu.`
             );
           } else {
             socket.request.session[deviceId].currentOrder = [];
             orderHistory.length = 0;
             socket.emit(
               "bot-message",
-              `Your order request has been cancelled.\n1. Place a new order\n98. Order history`
+              `Your order has been cancelled.\n1. Place a new order\n98. Order history`
             );
           }
           break;
@@ -218,7 +212,7 @@ io.on("connection", (socket) => {
             );
             socket.emit(
               "bot-message",
-              `You have added ${OrderMenu[itemNumber]} to your order\n You can add more meal items to your current order from the menu\n Enter '97' to see your current order\n '98' to see order history\n '99' to checkout\n '0' to cancel your order`
+              `You have added ${OrderMenu[itemNumber]} to your order ${userName}\n You can add more meal items to your current order from the menu\n Enter '97' to see your current order\n '98' to see order history\n '99' to checkout\n '0' to cancel your order`
             );
           } else {
             socket.emit(
@@ -230,12 +224,21 @@ io.on("connection", (socket) => {
       }
     }
   });
-  
   // Listen for disconnection event
   socket.on("disconnect", () => {
     delete socket.request.session[deviceId];
+
     console.log("User disconnected:", socket.id);
   });
 });
+
+
+
+
+// Setting up and starting the server
+server.listen(PORT, HOST, () => {
+  console.log(`Server is now running on http://${HOST}:${PORT}`);
+});
+
 
 
